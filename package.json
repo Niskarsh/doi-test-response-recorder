@@ -1,6 +1,7 @@
 {
   "name": "doi-test-response-recorder",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "npx tsx src/index.ts",
     "build": "tsc",
