@@ -1,2 +1,13 @@
 .env
 node_modules/
+
+.vscode/
+
+dist/
+
+*.log
+*.tsbuildinfo
+coverage/
+.DS_Store
+.env
+*.envWW
