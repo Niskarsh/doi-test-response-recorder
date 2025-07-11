@@ -15,7 +15,8 @@ app.post('/webhook', async (req: Request, res: Response) => {
   try {
     // MSG91 payload format → contacts[0].wa_id & messages[0].interactive.button_reply.title
     const waId  = req.body?.mobile;
-    let title = req.body?.button?.payload;
+    let button = JSON.parse(req.body?.button);
+    let title = button?.payload;
 
 
     if (!waId || !title) {
