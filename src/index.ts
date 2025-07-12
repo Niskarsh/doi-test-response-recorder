@@ -14,17 +14,18 @@ app.get('/health', (_req: Request, res: Response) => res.sendStatus(200));
 app.post('/webhook', async (req: Request, res: Response) => {
   try {
     // MSG91 payload format → contacts[0].wa_id & messages[0].interactive.button_reply.title
-    const waId  = req.body?.mobile;
+    const waId = req.body?.mobile;
     let button = JSON.parse(req.body?.button);
     let title = button?.payload;
 
 
-    if (!waId || !title) {
-      return res.status(400).json({ error: 'Invalid payload: missing wa_id or button title' });
+    // if (!waId || !title) {
+    //   return res.status(400).json({ error: 'Invalid payload: missing wa_id or button title' });
+    // }
+    if (title) {
+      title = title.trim().toLowerCase();
     }
-    title = title.trim().toLowerCase();
-
-    await addRow(new Date().toISOString(), waId, title);
+    await addRow(new Date().toISOString(), waId, title, JSON.stringify(req.body));
     return res.sendStatus(200);
   } catch (err) {
     console.error('[webhook] error:', err);

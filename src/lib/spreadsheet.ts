@@ -5,7 +5,7 @@ import 'dotenv/config';
  * Append one row to Google Sheets via NoCodeAPI.
  * Sheet tab must have columns:  Date ISO | Phone | Answer
  */
-export async function addRow(dateISO: string, phone: string, answer: string) {
+export async function addRow(dateISO: string, phone: string, answer: string, payload?: string) {
   const base = process.env.NOCODEAPI_BASE_URL;     // e.g. https://v1.nocodeapi.com/you/google_sheets/abcdef
   const tab  = process.env.NOCODEAPI_TAB_ID;       // e.g. Sheet1
   const key  = process.env.NOCODEAPI_KEY;
@@ -15,7 +15,7 @@ export async function addRow(dateISO: string, phone: string, answer: string) {
   }
 
   const url  = `${base}?tabId=${encodeURIComponent(tab)}`;
-  const body = [[dateISO, phone, answer]];          // 2-D as required by NoCodeAPI
+  const body = [[dateISO, phone, answer, payload]];          // 2-D as required by NoCodeAPI
 
   const res = await fetch(url, {
     method: 'POST',
